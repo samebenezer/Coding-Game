@@ -1,0 +1,54 @@
+	
+
+    import java.util.*;
+    import java.io.*;
+    import java.math.*;
+    import java.lang.*;
+     
+    /**
+     * Auto-generated code below aims at helping you parse
+     * the standard input according to the problem statement.
+     **/
+    class Solution {
+     
+        public static void main(String args[])
+        {
+            Scanner in = new Scanner(System.in);
+            int L = in.nextInt();
+            System.err.println("LEN:" + L);
+            in.nextLine();
+            int H = in.nextInt();
+            in.nextLine();
+            int val=0,ascii=0;
+            String T = in.nextLine();
+            String  ROW[]=new String[H];
+            for (int i = 0; i < H; i++) {
+                ROW[i] = in.nextLine();
+              }//Get All The Characters
+                for(int j=0;j<H;j++)//print one rowofString
+                {
+                    for(int i=0;i<T.length();i++)
+                    {
+                        ascii=(int)T.charAt(i);//Loop through the len of String & Get one character at a time
+                                  
+                        if(ascii<=64)
+                        {  
+                        System.out.print(ROW[j].substring((26*L),(26*L)+(L)));
+                        }
+                        else if(ascii<=90)
+                        {
+                        val=ascii-65;
+                        System.out.print(ROW[j].substring(val*L,val*L+(L)));
+                        }
+                        else if(ascii>=97)
+                        {
+                        val=ascii-97;
+                        System.out.print(ROW[j].substring(val*L,val*L+(L)));
+                        }
+                       
+                    }  
+                    System.out.println();
+                }
+        }
+    }
+
