@@ -2,57 +2,67 @@ import java.util.*;
 import java.io.*;
 import java.math.*;
 
-/**
- * Auto-generated code below aims at helping you parse
- * the standard input according to the problem statement.
- **/
 class Solution {
 
     public static void main(String args[]) {
         Scanner in = new Scanner(System.in);
+        String bin;
         char c;
-        int one=1,zero=1;//the number of one and zero digits encountered
+        int occ=1;
         String MESSAGE = in.nextLine();
-        for(int i=0;i<MESSAGE.length();i++)//Loop Through the message char by char
+        bin=Integer.toBinaryString((int)MESSAGE.charAt(0));
+        if(bin.length()<7)
         {
-            String bin=Integer.toBinaryString((int)MESSAGE.charAt(i));//Get the binary equivalent of each char
+            int diff=7-bin.length();
+            String binn="0";
+            for(int l=1;l<diff;l++)
+            binn+="0";
+            bin=binn + bin; 
+        }
+        for(int i=1;i<MESSAGE.length();i++)
+        {
+            if((Integer.toBinaryString((int)MESSAGE.charAt(i)).length())<7)
+        {
+            int diff=7-bin.length();
+            String binn="0";
+            for(int l=1;l<diff;l++)
+            binn+="0";
+            bin=bin + binn + Integer.toBinaryString((int)MESSAGE.charAt(i));
+        }
+        else
+            bin=bin + Integer.toBinaryString((int)MESSAGE.charAt(i));
+        }
+        
             for(int j=0;j<bin.length();)
             {
-                c=bin.charAt(j);//Get the first binary char
+                
+                c=bin.charAt(j);
                 if(c=='1')
                 {
-                    System.out.print("0 ");//Print One
-                    if(((j+one)<bin.length())&&(bin.charAt(j+one)=='1'))//If the len is within limits and the next char is also one
+                    System.out.print("0 ");
+                    for(;((j+occ)<bin.length())&&(bin.charAt(j+occ)=='1');)
                     {
-                        one++;//increment the no of ones
+                        occ++;
                     }
-                    else//if the next char is zero
-                    {
-                        for(int k=0;k<one;k++)
-                        System.out.print("0");//print the no of chars
-                        System.out.print(" ");//give a space for the next block
-                        j=j+one;//increment the control variable
-                        one=1;//set the number back to one
-                    }
+                    
                 }
-                else //if the char encountered is zero
+                else if(c=='0')
                 {
-                    System.out.print("00 ");//Print two
-                    if(((j+one)<bin.length())&&(bin.charAt(j+one)=='0'))//If the len is within limits and the next char is also zaero
+                    System.out.print("00 ");
+                    for(;((j+occ)<bin.length())&&(bin.charAt(j+occ)=='0');)
                     {
-                        zero++;//increment the no of zeroes
+                        occ++;
                     }
-                    else
-                    {
-                        for(int k=0;k<zero;k++)
-                        System.out.print("0");//print the no of chars
-                        System.out.print(" ");//give a space for the next block
-                        j=j+zero;//increment the control variable
-                        zero=1;//set the number back to one
-                    }
+                    
                 }
+                for(int k=0;k<occ;k++)
+                System.out.print("0");
+                if((j+occ)<bin.length())
+                System.out.print(" ");
+                j=j+occ;
+                occ=1;
             }
-        }
+        
         
     }
 }
