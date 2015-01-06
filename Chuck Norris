@@ -1,0 +1,58 @@
+import java.util.*;
+import java.io.*;
+import java.math.*;
+
+/**
+ * Auto-generated code below aims at helping you parse
+ * the standard input according to the problem statement.
+ **/
+class Solution {
+
+    public static void main(String args[]) {
+        Scanner in = new Scanner(System.in);
+        char c;
+        int one=1,zero=1;//the number of one and zero digits encountered
+        String MESSAGE = in.nextLine();
+        for(int i=0;i<MESSAGE.length();i++)//Loop Through the message char by char
+        {
+            String bin=Integer.toBinaryString((int)MESSAGE.charAt(i));//Get the binary equivalent of each char
+            for(int j=0;j<bin.length();)
+            {
+                c=bin.charAt(j);//Get the first binary char
+                if(c=='1')
+                {
+                    System.out.print("0 ");//Print One
+                    if(((j+one)<bin.length())&&(bin.charAt(j+one)=='1'))//If the len is within limits and the next char is also one
+                    {
+                        one++;//increment the no of ones
+                    }
+                    else//if the next char is zero
+                    {
+                        for(int k=0;k<one;k++)
+                        System.out.print("0");//print the no of chars
+                        System.out.print(" ");//give a space for the next block
+                        j=j+one;//increment the control variable
+                        one=1;//set the number back to one
+                    }
+                }
+                else //if the char encountered is zero
+                {
+                    System.out.print("00 ");//Print two
+                    if(((j+one)<bin.length())&&(bin.charAt(j+one)=='0'))//If the len is within limits and the next char is also zaero
+                    {
+                        zero++;//increment the no of zeroes
+                    }
+                    else
+                    {
+                        for(int k=0;k<zero;k++)
+                        System.out.print("0");//print the no of chars
+                        System.out.print(" ");//give a space for the next block
+                        j=j+zero;//increment the control variable
+                        zero=1;//set the number back to one
+                    }
+                }
+            }
+        }
+        
+    }
+}
